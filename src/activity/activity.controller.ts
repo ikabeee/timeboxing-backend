@@ -1,34 +1,24 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
-import { UpdateActivityDto } from './dto/update-activity.dto';
 
 @Controller('activity')
 export class ActivityController {
   constructor(private readonly activityService: ActivityService) {}
-
-  @Post()
-  create(@Body() createActivityDto: CreateActivityDto) {
-    return this.activityService.create(createActivityDto);
+  @Get('all')
+  async getAllActivities() {
+    return this.activityService.getAllActivities();
   }
-
-  @Get()
-  findAll() {
-    return this.activityService.findAll();
-  }
-
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.activityService.findOne(+id);
+  async getActivityById(@Param('id') id: string) {
+    return this.activityService.getActivityById(+id);
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateActivityDto: UpdateActivityDto) {
-    return this.activityService.update(+id, updateActivityDto);
+  @Post('create')
+  async createActivity(@Body() activity: CreateActivityDto) {
+    return this.activityService.createActivity(activity);
   }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.activityService.remove(+id);
+  @Delete('delete/:id')
+  async deleteActiviy(@Param('id') id: string) {
+    return this.activityService.deleteActivity(+id);
   }
 }
