@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Activity } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
@@ -24,9 +20,6 @@ export class ActivityService {
   }
 
   async getActivityById(id: number): Promise<Activity> {
-    if (id < 0) {
-      throw new BadRequestException('EXPECTED_NUMBER');
-    }
     const activity = await this.prisma.activity.findUnique({
       where: { id },
     });
