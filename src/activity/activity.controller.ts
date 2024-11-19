@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+} from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
 
@@ -10,7 +18,7 @@ export class ActivityController {
     return this.activityService.getAllActivities();
   }
   @Get(':id')
-  async getActivityById(@Param('id') id: string) {
+  async getActivityById(@Param('id', ParseIntPipe) id: string) {
     return this.activityService.getActivityById(+id);
   }
   @Post('create')
@@ -18,7 +26,7 @@ export class ActivityController {
     return this.activityService.createActivity(activity);
   }
   @Delete('delete/:id')
-  async deleteActiviy(@Param('id') id: string) {
+  async deleteActiviy(@Param('id', ParseIntPipe) id: string) {
     return this.activityService.deleteActivity(+id);
   }
 }
