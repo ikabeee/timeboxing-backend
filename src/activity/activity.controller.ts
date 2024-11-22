@@ -5,10 +5,12 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  Patch,
   Post,
 } from '@nestjs/common';
 import { ActivityService } from './activity.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
+import { UpdateActivityDto } from './dto/update-activity.dto';
 
 @Controller('activity')
 export class ActivityController {
@@ -25,6 +27,15 @@ export class ActivityController {
   async createActivity(@Body() activity: CreateActivityDto) {
     return this.activityService.createActivity(activity);
   }
+
+  @Patch('update/:id')
+  async UpdateActivity(
+    @Param('id', ParseIntPipe) id: string,
+    @Body() activity: UpdateActivityDto,
+  ) {
+    return this.activityService.updateActivity(+id, activity);
+  }
+
   @Delete('delete/:id')
   async deleteActiviy(@Param('id', ParseIntPipe) id: string) {
     return this.activityService.deleteActivity(+id);

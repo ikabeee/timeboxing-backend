@@ -4,21 +4,27 @@ export class CreateActivityDto {
   @IsString()
   @IsNotEmpty()
   title: string;
+
   @IsString()
   @IsNotEmpty()
   description: string;
+
   @IsString()
   @IsNotEmpty()
   start_hour: string;
+
   @IsString()
   @IsNotEmpty()
   end_hour: string;
+
   @IsNumber()
   @IsNotEmpty()
   status: number;
+
   @IsString()
   @IsNotEmpty()
   due_date: string;
   @IsNumber()
+  @IsNotEmpty()
   taskId: number;
 }
