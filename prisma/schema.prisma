@@ -20,6 +20,7 @@ model User {
   username String
   email    String @unique
   password String
+  status   Int
   tasks    Task[]
 }
 
@@ -41,6 +42,7 @@ model Activity {
   description String
   start_hour  String
   end_hour    String
+  due_date    String
   status      Int
   taskId      Int
   tasks       Task   @relation(fields: [taskId], references: [id])
