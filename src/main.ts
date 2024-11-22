@@ -5,7 +5,9 @@ import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  //Pipes
   app.useGlobalPipes(new ValidationPipe());
+  //Endpoints documentation
   const config = new DocumentBuilder()
     .setTitle('Timeboxing App')
     .setDescription('Application to manage activity time')
@@ -14,6 +16,7 @@ async function bootstrap() {
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, documentFactory);
+  //Enable port 3000
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
